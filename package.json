@@ -1,0 +1,20 @@
+{
+  "name": "nuxtjs-realworld",
+  "version": "1.0.0",
+  "description": "用 nuxtjs 实现 realworld",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nuxt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/licop/nuxtjs-realworld.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/licop/nuxtjs-realworld/issues"
+  },
+  "homepage": "https://github.com/licop/nuxtjs-realworld#readme"
+}
