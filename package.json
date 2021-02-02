@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/licop/nuxtjs-realworld/issues"
   },
-  "homepage": "https://github.com/licop/nuxtjs-realworld#readme"
+  "homepage": "https://github.com/licop/nuxtjs-realworld#readme",
+  "dependencies": {
+    "dayjs": "^1.10.4"
+  },
+  "devDependencies": {
+    "markdown-it": "^12.0.4"
+  }
 }
