@@ -3,6 +3,7 @@
  */
 module.exports = {
   router: {
+    mode: 'hash',
     linkActiveClass: 'active',
     // 自定义路由规则
     extendRoutes(routes, resolve) {
