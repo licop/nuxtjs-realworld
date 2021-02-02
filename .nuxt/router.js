@@ -22,7 +22,7 @@ Router.prototype.push = function push (location, onComplete = emptyFn, onAbort) 
 Vue.use(Router)
 
 export const routerOptions = {
-  mode: 'hash',
+  mode: 'history',
   base: '/',
   linkActiveClass: 'active',
   linkExactActiveClass: 'nuxt-link-exact-active',

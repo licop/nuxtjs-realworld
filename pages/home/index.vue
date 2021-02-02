@@ -76,7 +76,8 @@
                 <nuxt-link class="page-link" :to="{
                   name: 'home',
                   query: {
-                    page: item 
+                    page: item,
+                    tag: $route.query.tag
                   }
                 }">{{ item }}</nuxt-link>
               </li>
@@ -87,16 +88,20 @@
         <div class="col-md-3">
           <div class="sidebar">
             <p>Popular Tags</p>
-
             <div class="tag-list">
-              <a href="" class="tag-pill tag-default">programming</a>
-              <a href="" class="tag-pill tag-default">javascript</a>
-              <a href="" class="tag-pill tag-default">emberjs</a>
-              <a href="" class="tag-pill tag-default">angularjs</a>
-              <a href="" class="tag-pill tag-default">react</a>
-              <a href="" class="tag-pill tag-default">mean</a>
-              <a href="" class="tag-pill tag-default">node</a>
-              <a href="" class="tag-pill tag-default">rails</a>
+              <nuxt-link 
+                :to="{
+                  name: 'home',
+                  query: {
+                    tag: tag
+                  }
+                }"
+                class="tag-pill tag-default"
+                v-for="tag in tags"
+                :key="tag"
+              >
+                {{ tag }} 
+              </nuxt-link>
             </div>
           </div>
         </div>
@@ -107,26 +112,37 @@
 </template>
 
 <script>
-import { getArticles } from '@/api/article'
+import { getArticles } from '../../api/article'
+import { getTags } from '../../api/tag'
 
 export default {
   name: 'HomeIndex',
   async asyncData ({ query }) {
     const page = Number.parseInt(query.page || 1)
-    const limit = 10
-    
-    const { data } = await getArticles({
-      limit,
-      offset: (page - 1) * limit
-    })
+    const limit = 15
+    // 多个异步操作，没有依赖，并行请求两个接口
+    const [articleRes, tagRes] = await Promise.all([
+      getArticles({ 
+        limit, 
+        offset: (page - 1) * limit,
+        tag: 'AngularJS'
+      }),
+      getTags()
+    ])
+    console.log(query.tag, page, 131);
+    const { articles, articlesCount } = articleRes.data
+    const { tags } = tagRes.data
+
     return {
-      articles: data.articles,
-      articlesCount: data.articlesCount,
+      articles,
+      articlesCount,
       limit,
-      page
+      page,
+      tags
     }
   },
-  watchQuery: ['page'],
+
+  watchQuery: ['page', 'tag'],
   computed: {
     totalPage () {
       return Math.ceil(this.articlesCount / this.limit)
@@ -137,5 +153,4 @@ export default {
 </script>
 
 <style>
-
 </style>
