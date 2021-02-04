@@ -51,55 +51,116 @@
           <div class="articles-toggle">
             <ul class="nav nav-pills outline-active">
               <li class="nav-item">
-                <a class="nav-link active" href="">My Articles</a>
+                <nuxt-link 
+                  class="nav-link"
+                  exact
+                  :class="{
+                    active: tab === 'my'
+                  }"
+                  :to="{
+                    name: 'profile',
+                    params: {
+                      username: profile.username
+                    },
+                    query: {
+                      tab: 'my'
+                    }
+                  }"
+                >
+                  My Articles
+                </nuxt-link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Favorited Articles</a>
+                <nuxt-link 
+                  class="nav-link"
+                  exact
+                  :class="{
+                    active: tab === 'favorited'
+                  }"
+                  :to="{
+                    name: 'profile',
+                    params: {
+                      username: profile.username
+                    },
+                    query: {
+                      tab: 'favorited'
+                    }
+                  }"
+                >
+                  Favorited Articles
+                </nuxt-link>
               </li>
             </ul>
           </div>
-
-          <div class="article-preview">
+          <div class="article-preview" v-for='article in articles' :key="article.slug">
             <div class="article-meta">
-              <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+              <nuxt-link :to="{
+                name: 'profile',
+                params: {
+                  username: article.author.username
+                }
+              }">
+                <img :src="article.author.image" />
+              </nuxt-link >
               <div class="info">
-                <a href="" class="author">Eric Simons</a>
-                <span class="date">January 20th</span>
+                <nuxt-link :to="{
+                  name: 'profile',
+                  params: {
+                    username: article.author.username
+                  }
+                }" href="" class="author">
+                  {{ article.author.username }}
+                </nuxt-link>
+                <span class="date">{{ article.createdAt | date('MMM DD, YYYY') }}</span>
               </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 29
+              <button 
+                class="btn btn-outline-primary btn-sm pull-xs-right" 
+                :class="{active: article.favorited}"
+                @click="onFavorite(article)"
+                :disabled="article.favoriteDisabled"
+              >
+                <i class="ion-heart"></i> {{ article.favoritesCount }}
               </button>
             </div>
-            <a href="" class="preview-link">
-              <h1>How to build webapps that scale</h1>
-              <p>This is the description for the post.</p>
+            <nuxt-link 
+              :to="{
+                name: 'acticle',
+                params: {
+                  slug: article.slug
+                }
+              }"
+              class="preview-link"
+            >
+              <h1>{{ article.title }}</h1>
+              <p>{{ article.description }}</p>
               <span>Read more...</span>
-            </a>
+            </nuxt-link>
           </div>
 
-          <div class="article-preview">
-            <div class="article-meta">
-              <a href=""><img src="http://i.imgur.com/N4VcUeJ.jpg" /></a>
-              <div class="info">
-                <a href="" class="author">Albert Pai</a>
-                <span class="date">January 20th</span>
-              </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 32
-              </button>
-            </div>
-            <a href="" class="preview-link">
-              <h1>The song you won't ever stop singing. No matter how hard you try.</h1>
-              <p>This is the description for the post.</p>
-              <span>Read more...</span>
-              <ul class="tag-list">
-                <li class="tag-default tag-pill tag-outline">Music</li>
-                <li class="tag-default tag-pill tag-outline">Song</li>
-              </ul>
-            </a>
-          </div>
+           <!-----分页列表------>
+          <nav>
+            <ul class="pagination">
+              <li 
+                class="page-item"
+                :class="{
+                  active: item === page
+                }"
+                v-for="item in totalPage"
+                :key="item"
+              >
+                <nuxt-link class="page-link" :to="{
+                  name: 'home',
+                  query: {
+                    page: item,
+                    tag: $route.query.tag,
+                    tab
+                  }
+                }">{{ item }}</nuxt-link>
+              </li>
+            </ul>
+          </nav>
         </div>
-
+       
       </div>
     </div>
   </div>
@@ -107,24 +168,47 @@
 
 <script>
 import { getProfile, follow, unFollow } from '../../api/profile'
- 
+import { getArticles } from '../../api/article'
 
 export default {
   name: 'ProfileIndex',
 
-  async asyncData ({ params, store }) {
+  async asyncData ({ params, query, store }) {
     const username = params.username
+    const page = Number.parseInt(query.page || 1)
+    const tab = query.tab || 'my'
+    const limit = 15
     const { data: profileData}  = await getProfile(username)
-    const loadArticles = store.state.user && tab === 'your_feed' ? getFeedArticles : getArticles
+    
+    const profile = profileData.profile
+    const { data: articleData } = store.state.user && tab === 'favorited' ? await getArticles({
+        favorited: profile.username,
+        limit, 
+        offset: (page - 1) * limit
+      }) : await getArticles({
+        author: profile.username,
+        limit, 
+        offset: (page - 1) * limit
+      })
+    const {articles, articlesCount} = articleData
 
-    console.log(profile, username, store.state.user, 95)
+    console.log(articleData, 95)
     return {
-      profile
+      profile,
+      articles,
+      articlesCount,
+      tab,
+      limit,
+      page
     }
   },
+  watchQuery: ['page', 'tab'],
   computed: {
     isSelf() {
       return this.profile.username === this.$store.state.user.username
+    },
+    totalPage () {
+      return Math.ceil(this.articlesCount / this.limit)
     } 
   },
   methods: {
