@@ -35,15 +35,21 @@
       },
       {
         "path": "/editor",
-        "name": "editor",
+        "name": "newArticle",
         "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/editor",
         "_name": "_bc78aaf2"
       },
       {
-        "path": "/acticle/:slug",
-        "name": "acticle",
-        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/acticle",
-        "_name": "_7c0c946a"
+        "path": "/editor/:slug",
+        "name": "editArticle",
+        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/editor",
+        "_name": "_bc78aaf2"
+      },
+      {
+        "path": "/article/:slug",
+        "name": "article",
+        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/article",
+        "_name": "_48db31c8"
       }
     ],
     "_name": "_a4daf778"

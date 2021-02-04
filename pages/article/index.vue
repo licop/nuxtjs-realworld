@@ -36,7 +36,7 @@ import ArticleMeta from './components/article-meta'
 import ArticleComments from './components/article-comments'
 
 export default {
-  name: 'Acticle',
+  name: 'article',
   components: {
     ArticleMeta,
     ArticleComments

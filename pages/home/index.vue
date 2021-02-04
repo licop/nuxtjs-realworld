@@ -101,7 +101,7 @@
             </div>
             <nuxt-link 
               :to="{
-                name: 'acticle',
+                name: 'article',
                 params: {
                   slug: article.slug
                 }
@@ -188,7 +188,7 @@ export default {
     ])
     const { articles, articlesCount } = articleRes.data
     const { tags } = tagRes.data
-    articles.forEach(acticle => acticle.favoriteDisabled = false)
+    articles.forEach(article => article.favoriteDisabled = false)
     return {
       articles,
       articlesCount,

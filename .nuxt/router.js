@@ -10,7 +10,7 @@ const _372bdb0f = () => interopDefault(import('../pages/login' /* webpackChunkNa
 const _166fb862 = () => interopDefault(import('../pages/profile' /* webpackChunkName: "" */))
 const _357c66bd = () => interopDefault(import('../pages/settings' /* webpackChunkName: "" */))
 const _bc78aaf2 = () => interopDefault(import('../pages/editor' /* webpackChunkName: "" */))
-const _7c0c946a = () => interopDefault(import('../pages/acticle' /* webpackChunkName: "" */))
+const _48db31c8 = () => interopDefault(import('../pages/article' /* webpackChunkName: "" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -54,11 +54,15 @@ export const routerOptions = {
     }, {
       path: "/editor",
       component: _bc78aaf2,
-      name: "editor"
+      name: "newArticle"
     }, {
-      path: "/acticle/:slug",
-      component: _7c0c946a,
-      name: "acticle"
+      path: "/editor/:slug",
+      component: _bc78aaf2,
+      name: "editArticle"
+    }, {
+      path: "/article/:slug",
+      component: _48db31c8,
+      name: "article"
     }]
   }],
 

@@ -46,7 +46,6 @@
 
     <div class="container">
       <div class="row">
-
         <div class="col-xs-12 col-md-10 offset-md-1">
           <div class="articles-toggle">
             <ul class="nav nav-pills outline-active">
@@ -124,7 +123,7 @@
             </div>
             <nuxt-link 
               :to="{
-                name: 'acticle',
+                name: 'article',
                 params: {
                   slug: article.slug
                 }
@@ -192,7 +191,6 @@ export default {
       })
     const {articles, articlesCount} = articleData
 
-    console.log(articleData, 95)
     return {
       profile,
       articles,
@@ -219,7 +217,6 @@ export default {
       unFollow(this.profile.username)
     }
   }
-  
 }
 </script>
 
