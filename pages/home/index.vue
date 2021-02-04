@@ -186,6 +186,7 @@ export default {
       }),
       getTags()
     ])
+
     const { articles, articlesCount } = articleRes.data
     const { tags } = tagRes.data
     articles.forEach(article => article.favoriteDisabled = false)

@@ -54,7 +54,7 @@ export default {
       tagList: []
     }
     if(slug) {
-      const data = await getArticle(slug)
+      const { data } = await getArticle(slug)
       article = data.article
     }
     return {
@@ -92,8 +92,6 @@ export default {
     },
     addTag(tag) {
       this.article.tagList = this.article.tagList.concat([tag])
-      console.log(this.article.tagList.concat([tag]), 94)
-      console.log(this.article.tagList, 95)
     }
   }
 }

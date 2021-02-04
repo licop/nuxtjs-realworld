@@ -51,8 +51,8 @@ export default {
   },
   async asyncData ({params}) {
     const { data } = await getArticle(params.slug)
+    console.log(data, 54)
     const { article } = data
-    console.log(data)
     const md = new MarkdownIt()
     article.body = md.render(article.body)
 

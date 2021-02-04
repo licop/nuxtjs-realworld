@@ -2,7 +2,7 @@ import { request } from '@/plugins/request'
 
 // 获取文章列表
 export const getArticles = (params) => {
-  console.log(params)
+  console.log(params, 5)
   return request({
     method: 'GET',
     url: '/api/articles',
@@ -71,5 +71,20 @@ export const getComments = slug => {
   return request({
     method: 'GET',
     url: `/api/articles/${slug}/comments`
+  })
+}
+// 提交评论
+export const postComment = (params, slug) => {
+  return request({
+    method: 'POST',
+    url: `/api/articles/${slug}/comments`,
+    params
+  })
+}
+
+export const deleteComment = (id, slug) => {
+  return request({
+    method: 'POST',
+    url: `/api/articles/${slug}/comments/${id}`
   })
 }
