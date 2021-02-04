@@ -71,7 +71,9 @@ export default {
   },
   methods: {
     postComment() {
-      postComment({comment: {body: this.body} }, this.article.slug)
+      postComment({comment: {body: this.body} }, this.article.slug).then(() => {
+        this.body = ''
+      })
     }
   }
 }

@@ -34,14 +34,14 @@
         "_name": "_357c66bd"
       },
       {
-        "path": "/editor",
-        "name": "newArticle",
+        "path": "/editor/:slug",
+        "name": "editArticle",
         "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/editor",
         "_name": "_bc78aaf2"
       },
       {
-        "path": "/editor/:slug",
-        "name": "editArticle",
+        "path": "/editor",
+        "name": "newArticle",
         "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/editor",
         "_name": "_bc78aaf2"
       },

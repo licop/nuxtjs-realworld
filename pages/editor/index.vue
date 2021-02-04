@@ -46,8 +46,8 @@ export default {
   middleware: 'authenticated',
   name: 'EditorIndex',
   async asyncData ({ params }) {
-    const slug = params.slug
-    const article = {
+    const slug = params.slug || null
+    let article = {
       title: '',
       description: '',
       body: '',
@@ -78,7 +78,8 @@ export default {
           }
         })
       } else {
-        const { article } = await newArticle({ article: this.article })
+        const { data } = await newArticle({ article: this.article })
+        const { article } = data
         this.$router.push({
           name: 'article',
           params: {

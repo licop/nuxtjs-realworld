@@ -52,13 +52,13 @@ export const routerOptions = {
       component: _357c66bd,
       name: "settings"
     }, {
-      path: "/editor",
-      component: _bc78aaf2,
-      name: "newArticle"
-    }, {
       path: "/editor/:slug",
       component: _bc78aaf2,
       name: "editArticle"
+    }, {
+      path: "/editor",
+      component: _bc78aaf2,
+      name: "newArticle"
     }, {
       path: "/article/:slug",
       component: _48db31c8,

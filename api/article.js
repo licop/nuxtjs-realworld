@@ -2,7 +2,6 @@ import { request } from '@/plugins/request'
 
 // 获取文章列表
 export const getArticles = (params) => {
-  console.log(params, 5)
   return request({
     method: 'GET',
     url: '/api/articles',
@@ -43,19 +42,19 @@ export const getArticle = slug => {
   })
 }
 // 新建文章
-export const newArticle = params => {
+export const newArticle = data => {
   return request({
     method: 'POST',
     url: `/api/articles/`,
-    params
+    data
   })
 }
 // 更新文章
-export const updateArticle = (params, slug) => {
+export const updateArticle = (data, slug) => {
   return request({
     method: 'PUT',
     url: `/api/articles/${slug}`,
-    params
+    data
   })
 }
 // 删除文章
@@ -74,11 +73,11 @@ export const getComments = slug => {
   })
 }
 // 提交评论
-export const postComment = (params, slug) => {
+export const postComment = (data, slug) => {
   return request({
     method: 'POST',
     url: `/api/articles/${slug}/comments`,
-    params
+    data
   })
 }
 

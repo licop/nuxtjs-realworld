@@ -60,23 +60,24 @@
       </button>
     </template>
     <template v-else>
-      <nuxt 
+      <nuxt-link
         class="btn btn-outline-secondary btn-sm" 
+
         :to="{
-          name: editArticle,
+          name: 'editArticle',
           params: {
             slug: article.slug
           }
         }">
         <i class="ion-edit"></i> Edit Article
-      </nuxt>
+      </nuxt-link>
       &nbsp;
-     <button 
-      class="btn btn-outline-danger btn-sm" 
-      @click="deleteArticle()"
-    >
-      <i class="ion-trash-a"></i> Delete Article
-    </button>
+      <button 
+        class="btn btn-outline-danger btn-sm" 
+        @click="deleteArticle()"
+      >
+        <i class="ion-trash-a"></i> Delete Article
+      </button>
     </template>
   </div>
 </template>
@@ -111,8 +112,9 @@ export default {
     }
   },
   methods: {
-    deleteArticle() {
-      deleteArticle(this.article.slug)
+    async deleteArticle() {
+      await deleteArticle(this.article.slug)
+      this.$router.push('/')
     },
     async onFavorite () {
       this.article.favoriteDisabled = true

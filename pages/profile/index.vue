@@ -167,7 +167,7 @@
 
 <script>
 import { getProfile, follow, unFollow } from '../../api/profile'
-import { getArticles } from '../../api/article'
+import { getArticles, deleteFavorite, addFavorite } from '../../api/article'
 
 export default {
   name: 'ProfileIndex',
@@ -215,7 +215,21 @@ export default {
     },
     unfollow() {
       unFollow(this.profile.username)
-    }
+    },
+    async onFavorite (article) {
+      article.favoriteDisabled = true
+      if(article.favorited) {
+        // 取消点赞
+        await deleteFavorite(article.slug)
+        article.favorited = false
+        article.favoritesCount += -1
+      } else {
+        await addFavorite(article.slug)
+        article.favorited = true
+        article.favoritesCount += 1
+        article.favoriteDisabled = false
+      }
+    },
   }
 }
 </script>
