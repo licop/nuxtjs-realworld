@@ -56,7 +56,7 @@
       >
         <i class="ion-heart"></i>
         &nbsp;
-        {{ article.Favorite ? 'Unfavorite' : 'Favorite' }} Post <span class="counter">({{ article.favoritesCount}})</span>
+        {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Post <span class="counter">({{ article.favoritesCount}})</span>
       </button>
     </template>
     <template v-else>
@@ -127,8 +127,9 @@ export default {
         await addFavorite(this.article.slug)
         this.article.favorited = true
         this.article.favoritesCount += 1
-        this.article.favoriteDisabled = false
       }
+      this.article.favoriteDisabled = false
+
     },
     follow() {
       follow(this.profile.username)

@@ -70,8 +70,10 @@ export default {
     this.comments = data.comments
   },
   methods: {
-    postComment() {
-      postComment({comment: {body: this.body} }, this.article.slug).then(() => {
+    async postComment() {
+      postComment({comment: {body: this.body} }, this.article.slug).then(({ data }) => {
+        const { comment } = data
+        this.comments.unshift(comment)
         this.body = ''
       })
     }

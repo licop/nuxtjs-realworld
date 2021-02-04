@@ -227,8 +227,8 @@ export default {
         await addFavorite(article.slug)
         article.favorited = true
         article.favoritesCount += 1
-        article.favoriteDisabled = false
       }
+      article.favoriteDisabled = false
     },
   }
 }

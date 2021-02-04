@@ -11,7 +11,7 @@ export const getProfile = username => {
 // 关注
 export const follow = username => {
   return request({
-    method: 'PUT',
+    method: 'POST',
     url: `/api/profiles/${username}/follow`,
   })
 }
