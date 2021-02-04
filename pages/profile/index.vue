@@ -1,17 +1,14 @@
 <template>
   <div class="profile-page">
-
     <div class="user-info">
       <div class="container">
         <div class="row">
-
           <div class="col-xs-12 col-md-10 offset-md-1">
             <img :src="profile.image" class="user-img" />
             <h4>{{ profile.username }}</h4>
             <p>
               {{ profile.bio }}
             </p>
-            
             <div v-if="isSelf">
               <nuxt-link
                 class="btn btn-sm btn-outline-secondary action-btn"
@@ -210,11 +207,13 @@ export default {
     } 
   },
   methods: {
-    follow() {
-      follow(this.profile.username)
+    async follow() {
+      await follow(this.profile.username)
+      this.profile.following = true
     },
-    unfollow() {
-      unFollow(this.profile.username)
+    async unfollow() {
+      await unFollow(this.profile.username)
+      this.profile.following = false
     },
     async onFavorite (article) {
       article.favoriteDisabled = true

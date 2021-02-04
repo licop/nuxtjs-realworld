@@ -131,11 +131,13 @@ export default {
       this.article.favoriteDisabled = false
 
     },
-    follow() {
-      follow(this.profile.username)
+    async follow() {
+      await follow(this.profile.username)
+      this.profile.following = true
     },
-    unfollow() {
-      unFollow(this.profile.username)
+    async unfollow() {
+      await unFollow(this.profile.username)
+      this.profile.following = false
     }
   }
 }
