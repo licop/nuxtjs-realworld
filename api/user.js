@@ -16,3 +16,21 @@ export const register = (data) => {
     data
   })
 }
+
+// 获取个人的setting
+export const getUser = (data) => {
+  return request({
+    method: 'GET',
+    url: '/api/user',
+    data
+  })
+}
+
+// 更新个人的setting
+export const updateUser = (data) => {
+  return request({
+    method: 'PUT',
+    url: '/api/user',
+    data
+  })
+}
