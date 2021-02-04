@@ -6,43 +6,52 @@
       {
         "path": "",
         "name": "home",
-        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/home"
+        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/home",
+        "_name": "_1a8bfc79"
       },
       {
         "path": "/login",
         "name": "login",
-        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/login"
+        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/login",
+        "_name": "_372bdb0f"
       },
       {
         "path": "/register",
         "name": "register",
-        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/login"
+        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/login",
+        "_name": "_372bdb0f"
       },
       {
         "path": "/profile/:username",
         "name": "profile",
-        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/profile"
+        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/profile",
+        "_name": "_166fb862"
       },
       {
         "path": "/settings",
         "name": "settings",
-        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/settings"
+        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/settings",
+        "_name": "_357c66bd"
       },
       {
         "path": "/editor/:slug",
         "name": "editArticle",
-        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/editor"
+        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/editor",
+        "_name": "_bc78aaf2"
       },
       {
         "path": "/editor",
         "name": "newArticle",
-        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/editor"
+        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/editor",
+        "_name": "_bc78aaf2"
       },
       {
         "path": "/article/:slug",
         "name": "article",
-        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/article"
+        "component": "/Users/licop/Documents/GitHub/nuxtjs-realworld/pages/article",
+        "_name": "_48db31c8"
       }
-    ]
+    ],
+    "_name": "_a4daf778"
   }
 ]
