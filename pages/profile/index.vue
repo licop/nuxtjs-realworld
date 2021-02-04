@@ -6,16 +6,38 @@
         <div class="row">
 
           <div class="col-xs-12 col-md-10 offset-md-1">
-            <img src="http://i.imgur.com/Qr71crq.jpg" class="user-img" />
-            <h4>Eric Simons</h4>
+            <img :src="profile.image" class="user-img" />
+            <h4>{{ profile.username }}</h4>
             <p>
-              Cofounder @GoThinkster, lived in Aol's HQ for a few months, kinda looks like Peeta from the Hunger Games
+              {{ profile.bio }}
             </p>
-            <button class="btn btn-sm btn-outline-secondary action-btn">
-              <i class="ion-plus-round"></i>
-              &nbsp;
-              Follow Eric Simons 
-            </button>
+            
+            <div v-if="isSelf">
+              <nuxt-link
+                class="btn btn-sm btn-outline-secondary action-btn"
+                :to="{ name: 'settings' }"
+              >
+                <i class="ion-gear-a"></i> Edit Profile Settings
+              </nuxt-link>
+            </div>
+            <div v-else>
+              <button
+                class="btn btn-sm btn-secondary action-btn"
+                v-if="profile.following"
+                @click.prevent="unfollow()"
+              >
+                <i class="ion-plus-round"></i> &nbsp;Unfollow
+                {{ profile.username }}
+              </button>
+              <button
+                class="btn btn-sm btn-outline-secondary action-btn"
+                v-if="!profile.following"
+                @click.prevent="follow()"
+              >
+                <i class="ion-plus-round"></i> &nbsp;Follow
+                {{ profile.username }}
+              </button>
+            </div>
           </div>
 
         </div>
@@ -84,8 +106,36 @@
 </template>
 
 <script>
+import { getProfile, follow, unFollow } from '../../api/profile'
+ 
+
 export default {
-  name: 'ProfileIndex'
+  name: 'ProfileIndex',
+
+  async asyncData ({ params, store }) {
+    const username = params.username
+    const { data: profileData}  = await getProfile(username)
+    const loadArticles = store.state.user && tab === 'your_feed' ? getFeedArticles : getArticles
+
+    console.log(profile, username, store.state.user, 95)
+    return {
+      profile
+    }
+  },
+  computed: {
+    isSelf() {
+      return this.profile.username === this.$store.state.user.username
+    } 
+  },
+  methods: {
+    follow() {
+      follow(this.profile.username)
+    },
+    unfollow() {
+      unFollow(this.profile.username)
+    }
+  }
+  
 }
 </script>
 

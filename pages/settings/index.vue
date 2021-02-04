@@ -64,6 +64,12 @@ export default {
         user: this.user
       })
       this.$store.commit('setUser', this.user)
+      this.$router.push({
+        name: 'profile',
+        params: {
+          username: this.user.username
+        }
+      })
     },
     logout() {
       this.$store.commit('setUser', null)
