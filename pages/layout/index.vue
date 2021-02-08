@@ -43,7 +43,9 @@
               <nuxt-link class="nav-link" to="/login">Sign in</nuxt-link>
             </li>
           </template>
-
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/licop/nuxtjs-realworld" target="_blank">Github</a>
+            </li>
         </ul>
       </div>
     </nav>
